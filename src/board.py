@@ -88,7 +88,8 @@ class Board():
     def _reveal_recursively(self, index, seen):
         self._reveal_single(index, seen)
         for adjacent_index in self._get_adjacent_indices(index):
-            if self.board[adjacent_index].mine or adjacent_index in seen:
+            adj_mine_count = self._count_adjacent_mines(adjacent_index)
+            if adj_mine_count > 0 or adjacent_index in seen:
                 continue
             self._reveal_recursively(adjacent_index, seen)
 
