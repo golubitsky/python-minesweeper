@@ -1,5 +1,6 @@
 from src import board, view, constants
 import pytest
+import re
 
 def test_new_board_printed_all_empty(capsys):
     # arrange
@@ -7,11 +8,12 @@ def test_new_board_printed_all_empty(capsys):
     sut = view.View(board_input)
     
     # act
-    actual = sut.print()
+    sut.print()
     
     # assert
     out, err = capsys.readouterr()
-    assert out == '  0 1\n0 _ _\n1 _ _\n'
+    actual = re.findall('_', out)
+    assert len(actual) == 4
 
 def test_board_with_all_mines_prints_all_mines(capsys):
     # arrange
@@ -24,11 +26,12 @@ def test_board_with_all_mines_prints_all_mines(capsys):
     # act
     sut = view.View(board_input)
     
-    actual = sut.print()
+    sut.print()
     
     # assert
     out, err = capsys.readouterr()
-    assert out == '  0 1\n0 x x\n1 x x\n'
+    actual = re.findall('x', out)
+    assert len(actual) == 4
 
 def test_board_with_no_mines_prints_all_zeroes(capsys):
     # arrange
@@ -41,11 +44,13 @@ def test_board_with_no_mines_prints_all_zeroes(capsys):
     # act
     sut = view.View(board_input)
     
-    actual = sut.print()
+    sut.print()
     
     # assert
     out, err = capsys.readouterr()
-    assert out == '  0 1\n0 0 0\n1 0 0\n'
+    two_zeroes_in_labels = 2
+    actual = re.findall('0', out)
+    assert len(actual) - two_zeroes_in_labels == 4
 
 def test_board_with_half_mines_prints(capsys):
     # arrange
@@ -70,7 +75,9 @@ def test_board_with_half_mines_prints(capsys):
     # assert
     out, err = capsys.readouterr()
     a, b, c, d = expected_chars
-    assert out == f"  0 1\n0 {a} {b}\n1 {c} {d}\n"
+    actual = re.findall(f'{a}|{b}|{c}|{d}', out)
+    # this test is slightly imprecise 
+    assert len(actual) >= 4
 
 def test_board_with_flag_prints_flag(capsys):
     # arrange
@@ -84,4 +91,6 @@ def test_board_with_flag_prints_flag(capsys):
     
     # assert
     out, err = capsys.readouterr()
-    assert out == "  0 1\n0 f _\n1 _ _\n"
+    actual = re.findall('f', out)    
+    
+    assert len(actual) == 1
