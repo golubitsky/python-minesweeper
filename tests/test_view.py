@@ -11,7 +11,7 @@ def test_new_board_printed_all_empty(capsys):
     
     # assert
     out, err = capsys.readouterr()
-    assert out == '_ _\n_ _\n'
+    assert out == '  0 1\n0 _ _\n1 _ _\n'
 
 def test_board_with_all_mines_prints_all_mines(capsys):
     # arrange
@@ -28,7 +28,7 @@ def test_board_with_all_mines_prints_all_mines(capsys):
     
     # assert
     out, err = capsys.readouterr()
-    assert out == 'x x\nx x\n'
+    assert out == '  0 1\n0 x x\n1 x x\n'
 
 def test_board_with_no_mines_prints_all_zeroes(capsys):
     # arrange
@@ -45,7 +45,7 @@ def test_board_with_no_mines_prints_all_zeroes(capsys):
     
     # assert
     out, err = capsys.readouterr()
-    assert out == '0 0\n0 0\n'
+    assert out == '  0 1\n0 0 0\n1 0 0\n'
 
 def test_board_with_half_mines_prints(capsys):
     # arrange
@@ -70,7 +70,7 @@ def test_board_with_half_mines_prints(capsys):
     # assert
     out, err = capsys.readouterr()
     a, b, c, d = expected_chars
-    assert out == f"{a} {b}\n{c} {d}\n"
+    assert out == f"  0 1\n0 {a} {b}\n1 {c} {d}\n"
 
 def test_board_with_flag_prints_flag(capsys):
     # arrange
@@ -84,4 +84,4 @@ def test_board_with_flag_prints_flag(capsys):
     
     # assert
     out, err = capsys.readouterr()
-    assert out == "f _\n_ _\n"
+    assert out == "  0 1\n0 f _\n1 _ _\n"
