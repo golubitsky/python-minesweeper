@@ -80,12 +80,28 @@ class Board():
         """
         return self._size * y + x
 
+    def _reveal_single(self, index, seen):
+        cell = self.board[index]
+        cell.revealed = True
+        seen.add(index)
+
+    def _reveal_recursively(self, index, seen):
+        self._reveal_single(index, seen)
+        for adjacent_index in self._get_adjacent_indices(index):
+            if self.board[adjacent_index].mine or adjacent_index in seen:
+                continue
+            self._reveal_recursively(adjacent_index, seen)
+
     def reveal(self, y, x):
         """
             Reveal a cell at coord (y, x)
         """
-        cell = self.board[self._from_coord(y, x)]
-        cell.revealed = True
+        seen = set()
+        start_index = self._from_coord(y, x)
+
+        self._reveal_recursively(start_index, seen)
+        
+
 
     def toggle_flag(self, y, x):
         """

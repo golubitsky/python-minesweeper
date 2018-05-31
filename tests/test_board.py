@@ -33,6 +33,18 @@ def test_reveals_square():
 
     # assert
     assert actual[5].revealed == True
+
+
+def test_all_with_single_reveal_if_no_mines():
+    # arrange
+    mines = 0
+    sut = board.Board(3, mines)
+
+    # act
+    sut.reveal(1,2) # y, x
+
+    # assert
+    assert all(cell.revealed for cell in sut.board)
     
 def test_flags_square():
     # arrange
