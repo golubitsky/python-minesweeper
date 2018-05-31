@@ -84,9 +84,8 @@ class Board():
         cell.flagged = not cell.flagged
 
     def lost(self):
-        # each mine not revealed
-        pass
+        return any(mine.revealed for mine in filter(lambda cell: cell.mine, self.board))
     
     def won(self):
         # each non-mine is revealed
-        pass
+        return all(non_mine.revealed for non_mine in filter(lambda cell: not cell.mine, self.board))

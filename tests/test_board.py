@@ -56,3 +56,23 @@ def test_flag_of_square_is_toggled_back():
 
     # assert
     assert sut.board[5].flagged == False
+
+def test_lost_if_revealed_mine():
+    # arrange
+    sut = board.Board(3)
+
+    # act
+    # reveal all 
+    for y in range(3):
+        for x in range(3):
+            sut.reveal(y, x)
+
+    # assert
+    assert sut.lost()
+
+def test_not_won_on_initialize():
+    # arrange
+    sut = board.Board(3)
+
+    # assert
+    assert sut.won() == False
