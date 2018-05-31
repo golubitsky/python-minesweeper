@@ -1,7 +1,7 @@
 import random
 import os
-from src import constants
 from math import sqrt
+from src import constants
 
 class Cell():
     def __init__(self):
