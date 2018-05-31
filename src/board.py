@@ -1,6 +1,6 @@
 import random
 import os
-from src.constants import *
+from src import constants
 from math import sqrt
 
 class Cell():
@@ -42,7 +42,7 @@ class Board():
         mine_count = 0
 
         y, x = self._to_coord(index)
-        for vec_y, vec_x in directions:
+        for vec_y, vec_x in constants.directions:
             adj_y, adj_x = y + vec_y, x + vec_x
             if not self._is_in_bounds(adj_y, adj_x):
                 continue

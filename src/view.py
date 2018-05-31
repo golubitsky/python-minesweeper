@@ -1,7 +1,7 @@
 import random
 import os
 from math import sqrt
-from src.constants import *
+from src import constants
 
 class View():
     def __init__(self, board_class):
@@ -24,12 +24,12 @@ class View():
         for i in range(len(board)):
             cell = board[i]
             if cell.flagged:
-                view[i] = display_char_flagged
+                view[i] = constants.display_char_flagged
             elif cell.revealed and cell.mine:
-                view[i] = display_char_mine
+                view[i] = constants.display_char_mine
             elif cell.revealed:
                 view[i] = cell.n_surrounding_mines
             else:
-                view[i] = display_char_unrevealed
+                view[i] = constants.display_char_unrevealed
         
         return view
