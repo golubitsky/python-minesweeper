@@ -7,6 +7,8 @@ import platform
 class View():
     def __init__(self, board_class):
         self._view = self._convert_to_view(board_class.board)
+        self._won = board_class.won()
+        self._lost = board_class.lost()
         self._size = int(sqrt(len(board_class.board)))
 
     def clear(self):
@@ -15,7 +17,15 @@ class View():
 
     def print(self):
         self.clear()
-
+        self.print_board()
+        if self._won:
+            print('You win!')
+            exit
+        elif self._lost:
+            print('You lose.')
+            exit
+            
+    def print_board(self):
         x_labels = " ".join(map(str, list(range(self._size))))
         print("  " + x_labels)
         for y in range(self._size):
