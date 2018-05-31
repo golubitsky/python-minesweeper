@@ -71,7 +71,7 @@ class Board():
             Top-left corner = (0, 0)
             Bottom-right corner = (size - 1, size - 1)
         """
-        return (index % self._size, index // self._size)
+        return (index // self._size, index % self._size)
 
     def _from_coord(self, y, x):
         """

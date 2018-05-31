@@ -23,6 +23,26 @@ def test_corrent_number_of_mines_on_creation(expected_mines):
     # assert
     assert expected_mines == actual_mines
 
+test_data = [
+    (0, [1,3,4]),
+    (1, [0,2,3,4,5]),
+    (4, [0,1,2,3,5,6,7,8]),
+    (8, [4,5,7]),
+]
+@pytest.mark.parametrize("index, expected", test_data)
+def test_adjacent_indices(index, expected):
+    # arrange
+    sut = board.Board(3)
+    # 0 1 2
+    # 3 4 5
+    # 6 7 8
+
+    # act
+    actual = sut._get_adjacent_indices(index)
+
+    # assert
+    assert set(actual) == set(expected)
+    
 def test_reveals_square():
     # arrange
     sut = board.Board(3)
