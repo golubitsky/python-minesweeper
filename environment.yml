@@ -1,0 +1,4 @@
+name: project-env-name # replace me
+dependencies:
+- python=3
+- pytest-xdist # makes pytest -f option available
