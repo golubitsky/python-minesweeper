@@ -18,10 +18,6 @@ def test_corrent_number_of_mines_on_creation(expected_mines):
     sut = board.Board(10, expected_mines)
 
     # act
-    for y in range(10):
-        for x in range(10):
-            sut.reveal(y, x)
-
     actual_mines = sum(map(lambda x: x.mine, sut.board))
 
     # assert
