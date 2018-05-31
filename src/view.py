@@ -20,10 +20,8 @@ class View():
         self.print_board()
         if self._won:
             print('You win!')
-            exit
         elif self._lost:
             print('You lose.')
-            exit
             
     def print_board(self):
         x_labels = " ".join(map(str, list(range(self._size))))
