@@ -1,7 +1,7 @@
 from src import board
 import pytest
 
-@pytest.mark.parametrize("expected_size", [3,7,20])
+@pytest.mark.parametrize("expected_size", [3,7,10])
 def test_board_is_square_with_correct_dimensions(expected_size):
     # arrange
     sut = board.Board(expected_size)
@@ -11,6 +11,21 @@ def test_board_is_square_with_correct_dimensions(expected_size):
 
     # assert
     assert len(actual) == expected_size ** 2
+
+@pytest.mark.parametrize("expected_mines", [3,7,10])
+def test_corrent_number_of_mines_on_creation(expected_mines):
+    # arrange
+    sut = board.Board(10, expected_mines)
+
+    # act
+    for y in range(10):
+        for x in range(10):
+            sut.reveal(y, x)
+
+    actual_mines = sum(map(lambda x: x.mine, sut.board))
+
+    # assert
+    assert expected_mines == actual_mines
 
 def test_reveals_square():
     # arrange
